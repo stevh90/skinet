@@ -19,6 +19,7 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
+    "strictDomEventTypes": false,
     "strictInjectionParameters": true,
     "enableI18nLegacyMessageIdFormat": false
   }
