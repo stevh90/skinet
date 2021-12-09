@@ -1,60 +1,56 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IBrand } from '../shared/models/brands';
 import { IPagination } from '../shared/models/pagination';
-import {IBrand} from '../shared/models/brands';
-import {IType} from '../shared/models/productType';
+import { IType } from '../shared/models/productType';
+import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
-import {map} from 'rxjs/operators';
+import { IProduct } from '../shared/models/products';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-    baseUrl = 'https://localhost:5001/api/';
+  baseUrl = 'https://localhost:5001/api/'
 
-    constructor(private http: HttpClient) 
-    {
+  constructor(private http: HttpClient) { }
 
+  getProducts(shopParams: ShopParams) {
+    let params = new HttpParams();
+
+    if (shopParams.brandId !== 0) {
+      params = params.append('brandId', shopParams.brandId.toString())
     }
-    getProducts(shopParams: ShopParams)
-    {
-      let params = new HttpParams();
-      if(shopParams.brandId !== 0){
-        params = params.append('brandId', shopParams.brandId.toString());
-      }
 
-      if(shopParams.typeId !== 0)
-      {
-        params = params.append('typeId', shopParams.typeId.toString());
-      }
-      
-      if(shopParams.search)
-      {
-        params = params.append('search', shopParams.search);
-      }
+    if (shopParams.typeId !== 0) {
+      params = params.append('typeId', shopParams.typeId.toString())
+    }
 
-      params = params.append('sort', shopParams.sort);
-      params = params.append('pageIndex', shopParams.pageNumber.toString());
-      params = params.append('pageIndex', shopParams.pageSize.toString());
-      // returning an obserable so you need to project it in to the IPagination object (pipes)
-      return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
+    if (shopParams.search) {
+      params = params.append('search', shopParams.search)
+    }
+
+    params = params.append('sort', shopParams.sort);
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'products', { observe: 'response', params })
       .pipe(
-        
-        map(response =>
-        {
+        map(response => {
           return response.body;
         })
-      );
+      )
+  }
 
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
+  }
 
-    }
-    getBrands()
-    {
-      return this.http.get<IBrand[]>(this.baseUrl +'products/brands');
-    }
-    getTypes()
-    {
-      return this.http.get<IType[]>(this.baseUrl +'products/brands');
-    }
+  getBrands() {
+    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
+  }
 
+  getTypes() {
+    return this.http.get<IType[]>(this.baseUrl + 'products/types');
+  }
 }
