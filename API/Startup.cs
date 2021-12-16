@@ -1,7 +1,7 @@
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Helpers;
-using API.MIddleware;
+using API.Middleware;
 using API.Extensions;
 using StackExchange.Redis;
 using Infrastructure.Identity;
@@ -47,9 +47,6 @@ namespace API
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
             });
-
-            
-                    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

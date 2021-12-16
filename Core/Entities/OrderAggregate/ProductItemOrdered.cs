@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Core.Entities.OrderAggregate
 {
     public class ProductItemOrdered
@@ -18,9 +13,8 @@ namespace Core.Entities.OrderAggregate
             PictureUrl = pictureUrl;
         }
 
-        public int ProductItemId{get; set;}
-        public string ProductName{get;set;}
-        public string PictureUrl{get;set;}
-        
+        public int ProductItemId { get; set; }
+        public string ProductName { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

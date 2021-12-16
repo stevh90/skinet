@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 
 namespace Core.Entities.OrderAggregate
 {
@@ -10,10 +6,11 @@ namespace Core.Entities.OrderAggregate
     {
         [EnumMember(Value = "Pending")]
         Pending,
-        [EnumMember(Value = "Payment Recieved")]
-        PaymentRecieved,
+
+        [EnumMember(Value = "Payment Received")]
+        PaymentReceived,
+
         [EnumMember(Value = "Payment Failed")]
         PaymentFailed
-        
     }
 }

@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Security.Claims;
+using System.Linq;
 
 namespace API.Extensions
 {
-    public static class ClaimsPrincipleExtensions
+    public static class ClaimsPrincipalExtensions
     {
-        /*        public static string RetrieveEmailFromPrincipal(this ClaimsPrinciple user)
+        public static string RetrieveEmailFromPrincipal(this ClaimsPrincipal user)
         {
-            return user.FindFirstValue(ClaimsType.Email);
+            return user.FindFirstValue(ClaimTypes.Email);  //user?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value
         }
-        */
     }
 }
