@@ -14,10 +14,12 @@ export interface IOrder {
     deliveryMethod: string;
     shippingPrice: number;
     orderItems: IOrderItem[];
-    subtotal: number;
+    subtotal: number;    
+    total: number;
     status: string;
+    tax: number;
   }
-
+  
   export interface IOrderItem {
     productId: number;
     productName: string;

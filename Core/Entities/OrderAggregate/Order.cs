@@ -16,6 +16,9 @@ namespace Core.Entities.OrderAggregate
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
+            //Tax = Convert.ToDecimal(0.08);
+            Total = GetTotal();
+            
         }
 
         public string BuyerEmail { get; set; }
@@ -24,16 +27,18 @@ namespace Core.Entities.OrderAggregate
         public DeliveryMethod DeliveryMethod { get; set; }
         public IReadOnlyList<OrderItem> OrderItems { get; set; }
         public decimal Subtotal { get; set; }
-
+        public decimal Total {get; set;} 
+        //public decimal Tax{get;set;}
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        
         
         //TODO:
         public string PaymentIntentId { get; set; } = "This is an id";
 
         public decimal GetTotal()
         {
-            return Subtotal + DeliveryMethod.Price;
+            return Subtotal  + DeliveryMethod.Price;
         }
     }
 }
